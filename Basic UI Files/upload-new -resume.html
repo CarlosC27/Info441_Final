@@ -35,6 +35,21 @@
                 <button class="gold-button">Begin Review</button>
             </div>
         </div>
+        <div id="specific-review-popup" class="popup hidden">
+            <p id="review-title">Review For</p>
+            <form class="review-options-container">
+                <!-- THESE ARE FOR EXAMPLE PURPOSES, once we have the profile set up and our data base will modify to load for the users info from their data base  -->
+                <label><input type="checkbox" name="role" value="operations-manager"> Operations Manager</label><br>
+                <label><input type="checkbox" name="role" value="property-management"> Property Management</label><br>
+                <label><input type="checkbox" name="role" value="construction-manager"> Construction Manager</label><br>
+                <label><input type="checkbox" name="role" value="program-manager"> Program Manager</label><br>
+                <label><input type="checkbox" name="role" value="marketing-manager"> Marketing Manager</label><br>
+                <label><input type="checkbox" name="role" value="product-manager"> Product Manager</label><br>
+                <label><input type="checkbox" name="role" value="it-project-manager"> IT Project Manager</label><br>
+                <label><input type="checkbox" name="role" value="strategic-consulting"> Strategic Consulting</label><br>
+            </form>
+            <button class="gold-button" id="close-popup">Close</button>
+        </div>
         <div class="LLM-Output">
             <p>Output Textbox</p>
         </div>
@@ -45,5 +60,6 @@
     <footer>
         <!-- <p>&copy; 2024 RÉVISEMÉ. All rights reserved.</p> -->
     </footer>
+    <script src="tempCode.js"></script>
 </body>
 </html>

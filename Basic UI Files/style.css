@@ -345,3 +345,45 @@ h1, h2, h3{
     font-family: 'Montserrat', Arial, Helvetica, sans-serif;
     font-weight: bolder;
 }
+
+/* popup menu */
+
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2C3E50;
+  border-radius: 32px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  color: white;
+  width: 300px;
+}
+
+.popup.hidden {
+  display: none;
+}
+
+#specific-review-popup h2 {
+  margin: 0;
+  text-align: center;
+}
+
+#review-title{
+  font-weight: bold;
+}
+
+.review-options-container{
+  display: flex;
+  flex-direction: column;
+}
+
+#close-popup {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+
+
