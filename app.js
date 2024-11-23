@@ -20,7 +20,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get("/", async (req, res) => {
-    let fileContents = await fs.readFile("public/homepage.html")
+    let fileContents = await fs.readFile("public/log-in-page.html")
     res.type("html")
     res.send(fileContents)
 })
