@@ -32,6 +32,35 @@ app.get("/", async (req, res) => {
     res.send(fileContents)
 })
 
+app.get("/home", async (req, res) => {
+    let fileContents = await fs.readFile("public/homepage.html")
+    res.type("html")
+    res.send(fileContents)
+})
+
+app.get("/newjob", async (req, res) => {
+    let fileContents = await fs.readFile("public/new-job-review-page.html")
+    res.type("html")
+    res.send(fileContents)
+})
+app.get("/newresume", async (req, res) => {
+    let fileContents = await fs.readFile("public/upload-new-resume.html")
+    res.type("html")
+    res.send(fileContents)
+})
+
+app.get("/profile", async (req, res) => {
+    let fileContents = await fs.readFile("public/profile-page.html")
+    res.type("html")
+    res.send(fileContents)
+})
+
+app.get("/editprofile", async (req, res) => {
+    let fileContents = await fs.readFile("public/edit-profile.html")
+    res.type("html")
+    res.send(fileContents)
+})
+
 app.get('/style.css', async (req, res) => {
     console.log("request to '/style.css', sending back css content")
     let fileContents = await fs.readFile("public/stylesheets/style.css")
