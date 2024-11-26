@@ -20,7 +20,7 @@ try {
         filtered_user_skills: String,
         user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
         llm_response: String
-    })
+    }, { timestamps: true });
     models.Resume = mongoose.model('Resume', resumeSchema);
 } catch (error) {
     console.log(error);
