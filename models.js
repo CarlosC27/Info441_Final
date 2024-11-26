@@ -18,7 +18,7 @@ try {
         resume: String,
         job_description: String,
         filtered_user_skills: String,
-        user: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+        username: String,
         llm_response: String
     }, { timestamps: true });
     models.Resume = mongoose.model('Resume', resumeSchema);
