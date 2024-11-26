@@ -3,6 +3,11 @@ import dotenv from 'dotenv';
 dotenv.config();
 let models = {}
 
+await mongoose.connect('mongodb+srv://INFO441CACS:INFO441A1@info441.hyqcc.mongodb.net/Info441DB?retryWrites=true&w=majority&appName=INFO441.userSchema');
+
+console.log("successfully connected to mongodb!");
+
+
 try {
     console.log(process.env.CONNECTION_STRING);
     await mongoose.connect(process.env.CONNECTION_STRING)
@@ -10,7 +15,8 @@ try {
         skills: [String],
         job_interests: [String],
         username: String,
-        email: String
+        email: String,
+        currentJobRole: String
     })
     models.User = mongoose.model('User', userSchema);
 

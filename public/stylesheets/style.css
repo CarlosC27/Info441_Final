@@ -48,6 +48,7 @@ h1, h2, h3{
     font-weight: 700;
     border-style: none;
     width: 104px;
+    cursor: pointer;
 }
 
 .Log-in-container{

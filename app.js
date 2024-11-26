@@ -6,6 +6,7 @@ import {promises as fs} from 'fs';
 import WebAppAuthProvider from 'msal-node-wrapper';
 import session from 'express-session';
 import apiRouter from './routes/api/v1/apiv1.js';
+// import usersRouter from "./routes/api/v1/controllers/users.js"
 
 
 import { fileURLToPath } from 'url';
@@ -58,6 +59,7 @@ app.use(authProvider.authenticate());
 app.use(authProvider.interactionErrorHandler());
 
 app.use('/api', apiRouter);
+// app.use('/api/v1/users', usersRouter)
 
 app.get('/signin', (req, res, next) => {
     return req.authContext.login({
@@ -67,9 +69,21 @@ app.get('/signin', (req, res, next) => {
 });
 app.get('/signout', (req, res, next) => {
     return req.authContext.logout({
-        postLogoutRedirectUri: "/", // redirect here after logout
+        postLogoutRedirectUri: "/homepage", // redirect here after logout
     })(req, res, next);
 
+});
+
+app.get('/homepage', async (req, res) => {
+    if (!req.authContext.isAuthenticated) {
+        return res.redirect('/signin'); 
+    }
+    console.log("Signed in")
+    const username = req.authContext.account?.username || "Guest"; 
+    let fileContents = await fs.readFile("public/homepage.html", "utf-8");
+    fileContents = fileContents.replace("Hello, NAME!", `Hello, ${username}!`);
+    res.type("html");
+    res.send(fileContents);
 });
 
 
@@ -85,5 +99,7 @@ app.get('/style.css', async (req, res) => {
     res.type("css")
     res.send(fileContents)
 })
+
+app.use(authProvider.interactionErrorHandler());
 
 export default app;
