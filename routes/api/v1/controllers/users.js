@@ -10,7 +10,8 @@ router.post('/', async function(req, res, next) {
                 skills: req.skills,
                 job_interests: req.job_interests,
                 username: session.account.username,
-                email: req.email
+                email: req.email,
+                jobTitle: req.jobTitle
             })
             await newUser.save()
             res.send({ "status": "success" });
@@ -25,14 +26,36 @@ router.post('/', async function(req, res, next) {
 
 router.get('/profile', async function(req, res, next) {
     try {
-        let query = {};
-        query.username = req.query.userame;
-        let userProfile = await models.User.find(query);
-        res.send(userProfile);
+        const sessionUsername = req.session.account?.username; // Extract username from session
+        if (!sessionUsername) {
+            return res.status(401).json({ error: 'Not logged in' });
+        }
+        res.json({ username: sessionUsername }); // Return username
     } catch (error) {
-        console.log(error);
-        res.send({ "status": "error", "error": error });
+        console.error('Error in /profile:', error);
+        res.status(500).json({ error: 'Internal server error' });
     }
-})
+});
+
+
+router.get('/myIdentity', (req, res) => {
+    console.log("Session Data:", req.session);
+    if (req.session.isAuthenticated) {
+        res.json({
+            status: "loggedin",
+            userInfo: {
+                name: req.session.account?.name,
+                username: req.session.account?.username,
+            },
+        });
+    } else {
+        res.json({ status: "loggedout" });
+    }
+});
+
+
+
+
+
 
 export default router;

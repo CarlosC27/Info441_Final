@@ -60,18 +60,33 @@ app.use(authProvider.interactionErrorHandler());
 app.use('/api', apiRouter);
 
 app.get('/signin', (req, res, next) => {
+    console.log('Sign-in initiated...');
     return req.authContext.login({
-        postLoginRedirectUri: "/", // redirect here after login
+        postLoginRedirectUri: "/homepage.html", // Redirect after login
     })(req, res, next);
-
 });
+
 app.get('/signout', (req, res, next) => {
     return req.authContext.logout({
-        postLogoutRedirectUri: "/", // redirect here after logout
+        postLogoutRedirectUri: "/log-in-page.html",// redirect here after logout
     })(req, res, next);
 
 });
 
+// router.get('/myIdentity', (req, res) => {
+//     console.log("Session Data:", req.session);
+//     if (req.session.isAuthenticated) {
+//         res.json({
+//             status: "loggedin",
+//             userInfo: {
+//                 name: req.session.account?.name,
+//                 username: req.session.account?.username,
+//             },
+//         });
+//     } else {
+//         res.json({ status: "loggedout" });
+//     }
+// });
 
 app.get("/", async (req, res) => {
     let fileContents = await fs.readFile("public/log-in-page.html")
