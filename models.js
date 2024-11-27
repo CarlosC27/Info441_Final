@@ -41,8 +41,10 @@ try {
         skills: [String],
         job_interests: [String],
         username: String,
+        firstName: String,
+        lastName: String,
         email: String,
-        // jobTitle: String,
+         jobTitle: String,
     })
     models.User = mongoose.model('User', userSchema);
 

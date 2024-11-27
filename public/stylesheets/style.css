@@ -386,5 +386,33 @@ h1, h2, h3{
   cursor: pointer;
 }
 
+/* edit profile*/
+
+.edit-profile-page-header{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.delete-button{
+  max-width: fit-content;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  color: #2C3E50;
+  background: #D8C3A5;
+  border: none;
+  border-radius: 32px;
+  font-size: 15px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.edit-profile-container{
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
+  width: 60%;
+}
+
+
 
 

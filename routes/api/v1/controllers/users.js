@@ -10,6 +10,8 @@ router.post('/', async function(req, res, next) {
                 skills: req.body.skills,
                 job_interests: req.body.job_interests,
                 username: session.account.username,
+                firstName: session.account.name,
+                lastName: req.body.lastName,
                 email: req.body.email,
                 jobTitle: req.body.jobTitle
             })
@@ -26,11 +28,14 @@ router.post('/', async function(req, res, next) {
 
 router.get('/profile', async function(req, res, next) {
     try {
-        const sessionUsername = req.session.account?.username; // Extract username from session
+        const sessionUsername = req.session.account?.username;
+        const sessionName = req.session.account?.name // Extract username from session
         if (!sessionUsername) {
             return res.status(401).json({ error: 'Not logged in' });
         }
-        res.json({ username: sessionUsername }); // Return username
+        res.json({ username: sessionUsername,
+            firstName:sessionName
+         }); // Return username
     } catch (error) {
         console.error('Error in /profile:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -52,6 +57,41 @@ router.get('/myIdentity', (req, res) => {
         res.json({ status: "loggedout" });
     }
 });
+
+// edit profile endpoints
+
+// Update User Name
+router.post('/updateName', async function (req, res, next) {
+    const session = req.session;
+
+    if (session.isAuthenticated) {
+        try {
+            const { firstName, lastName } = req.body;
+            if (!firstName || !lastName) {
+                return res.status(400).json({ error: 'First and Last Name are required' });
+            }
+
+            // Find the user and update the name
+            const user = await models.User.findOneAndUpdate(
+                { username: session.account.username }, 
+                { firstName, lastName }, 
+                { new: true }
+            );
+
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+
+            res.json({ status: 'success', user });
+        } catch (error) {
+            console.error('Error updating name:', error);
+            res.status(500).json({ error: 'Internal server error' });
+        }
+    } else {
+        res.status(401).json({ error: 'Not logged in' });
+    }
+});
+
 
 
 
