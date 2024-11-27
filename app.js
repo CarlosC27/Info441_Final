@@ -66,6 +66,13 @@ app.get('/signin', (req, res, next) => {
     })(req, res, next);
 });
 
+app.get('/signinNewUser', (req, res, next) => {
+    console.log('Sign-in initiated...');
+    return req.authContext.login({
+        postLoginRedirectUri: "/", 
+    })(req, res, next);
+});
+
 app.get('/signout', (req, res, next) => {
     return req.authContext.logout({
         postLogoutRedirectUri: "/log-in-page.html",// redirect here after logout

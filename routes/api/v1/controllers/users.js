@@ -7,11 +7,11 @@ router.post('/', async function(req, res, next) {
     if (session.isAuthenticated) {
         try {
             const newUser = new models.User({
-                skills: req.skills,
-                job_interests: req.job_interests,
+                skills: req.body.skills,
+                job_interests: req.body.job_interests,
                 username: session.account.username,
-                email: req.email,
-                jobTitle: req.jobTitle
+                email: req.body.email,
+                jobTitle: req.body.jobTitle
             })
             await newUser.save()
             res.send({ "status": "success" });
