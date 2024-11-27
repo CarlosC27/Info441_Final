@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A basic HTML template">
+    <title>RÉVISEMÉ</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baskervville:ital@0;1&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+</head>
+<body class="edit-profile-page">
+    <header class="edit-profile-page-header">
+        <div class="titles">
+            <h1 class="profile-page-title">Edit Profile</h1>
+        </div>
+    </header>
+    <main class="edit-profile-main">
+        <div class="edit-profile-container">
+            <div class="edit-name-container">
+                <h2 class="edit-profile-subheading">First Name</h2>
+                <input type="text" id="fname" name="fname" />
+                <h2 class="edit-profile-subheading">Last Name</h2>
+                <input type="text" id="lname" name="lname" />
+                <div>
+                    <button type="button" class="gold-button" id="updateNameButton">Update Name</button>
+                </div>
+            </div>
+            <div class="edit-job-title-container">
+                <!-- job title -->
+                <h2 class="edit-profile-subheading">Job Title:</h2>
+                <input type="text" id="newJobTitle" name="newJobTitle"/>
+                <div>
+                    <button type="button" class="gold-button" id="updateJobTitleButton">Update Job Title</button>
+                </div>
+            </div>
+            <div class="edit-fav-resume-container">
+                <!-- favorite resumes -->
+                <h2 class="edit-profile-subheading">Favorite Resumes</h2>
+            </div>
+            <div class="edit-skills-container">
+                <h2 class="edit-profile-subheading">Skills</h2>
+                <div>
+                    <!-- add a list of current skills and a button to delete them -->
+                    <div class="skills-grid-container">
+                        <!-- current skills go in here -->
+                        <div class="skills-grid-item">
+                            <a>Defining Project Scope</a>
+                            <button type="button" class="delete-button">Delete</button>
+                        </div>
+                    </div>
+                    <!-- add an input to input new skills -->
+                    <p>New Skill</p>
+                    <input type="text" id="newSkill" name="newSkill"/>
+                    <!-- add a button to add new skills to the list -->
+                    <div>
+                        <button type="button" class="gold-button" id="addToSkillsButton">Add To Skills</button>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="edit-job-interest-container">
+                <h2 class="edit-profile-subheading">Job Interest</h2>
+                <div>
+                    <!-- add a list of current job intrests and a button to delete them -->
+                    <div class="skills-grid-container">
+                        <!-- current interest go in here -->
+                        <div class="job-interest-grid-ite">
+                            <a>Operations Manager</a>
+                            <button type="button" class="delete-button">Delete</button>
+                        </div>
+                    </div>
+                    <!-- add an input to input new intrests -->
+                    <p>New Job Interest</p>
+                    <input type="text" id="newJobInterest" name="newJobInterest" />
+                    <!-- add a button to add new intrests to the list -->
+                    <div>
+                        <button type="button" class="gold-button" id="addInterestButton">Add To Job Interes</button>
+                    </div>
+                </div>
+            </div>
+            <div class="link-button" id="saveProfileButton">
+                <a href>Save Profile</a>
+            </div>
+        </div>        
+    </main>
+
+     <footer>
+        <!-- <p>&copy; 2024 RÉVISEMÉ. All rights reserved.</p> -->
+     </footer>
+</body>
+</html>

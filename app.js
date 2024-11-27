@@ -69,7 +69,7 @@ app.get('/signin', (req, res, next) => {
 app.get('/signinNewUser', (req, res, next) => {
     console.log('Sign-in initiated...');
     return req.authContext.login({
-        postLoginRedirectUri: "/", 
+        postLoginRedirectUri: "/edit-profile.html", 
     })(req, res, next);
 });
 

@@ -1,5 +1,6 @@
 async function init() {
     setupLoginButton(); // Attach event listener to the login button
+    setupRegisterButton();
     await loadUserInfo(); // Fetch user info and update the homepage
 }
 
@@ -8,6 +9,14 @@ function setupLoginButton() {
     if (loginButton) {
         loginButton.addEventListener('click', () => {
             window.location.href = '/signin'; // Redirect to signin route
+        });
+    }
+}
+function setupRegisterButton() {
+    const registerButton = document.getElementById('registerButton');
+    if (registerButton) {
+        registerButton.addEventListener('click', () => {
+            window.location.href = '/signinNewUser'; // Redirect to signin route
         });
     }
 }
