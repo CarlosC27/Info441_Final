@@ -35,7 +35,7 @@ router.get('/profile', async function(req, res, next) {
         }
         res.json({ username: sessionUsername,
             firstName:sessionName
-         }); // Return username
+         });
     } catch (error) {
         console.error('Error in /profile:', error);
         res.status(500).json({ error: 'Internal server error' });
@@ -70,8 +70,6 @@ router.post('/updateName', async function (req, res, next) {
             if (!firstName || !lastName) {
                 return res.status(400).json({ error: 'First and Last Name are required' });
             }
-
-            // Find the user and update the name
             const user = await models.User.findOneAndUpdate(
                 { username: session.account.username }, 
                 { firstName, lastName }, 
