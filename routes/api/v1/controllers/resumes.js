@@ -75,4 +75,55 @@ router.get('/review_results', async function(req, res, next) {
     }
 })
 
+router.post('/simple', async (req, res) => {
+    try {
+        const { username, resumeName, resume, resumeReviewName, favorited, output } = req.body;
+
+        if (!username || !resumeName || !resume || !resumeReviewName) {
+            return res.status(400).json({ message: 'All required fields must be provided.' });
+        }
+        const newReview = new models.simpleReview({
+            username,
+            resumeName,
+            resume,
+            resumeReviewName,
+            favorited: favorited || false,
+            output
+        });
+
+        const savedReview = await newReview.save();
+        res.status(201).json({ message: 'Simple review saved successfully', id: savedReview._id });
+    } catch (error) {
+        console.error('Error saving simple review:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.post('/specific', async (req, res) => {
+    try {
+        const { username, resumeName, resume, resumeReviewName, favorited, output, specificJobs } = req.body;
+        if (!username || !resumeName || !resume || !resumeReviewName || !specificJobs || specificJobs.length === 0) {
+            return res.status(400).json({ message: 'All required fields must be provided.' });
+        }
+        const newReview = new models.SpecifcReview({
+            username,
+            resumeName,
+            resume,
+            resumeReviewName,
+            favorited: favorited || false,
+            output,
+            specificJobs
+        });
+
+        const savedReview = await newReview.save();
+        res.status(201).json({ message: 'Specific review saved successfully', id: savedReview._id });
+    } catch (error) {
+        console.error('Error saving specific review:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+
 export default router;
