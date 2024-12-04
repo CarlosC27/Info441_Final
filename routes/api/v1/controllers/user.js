@@ -38,6 +38,37 @@ router.post('/register', async (req, res) => {
   }
 });
 
+router.put('/update', async (req, res) => {
+  const { username } = req.session.account || {};
+
+  try {
+    const { firstName, lastName, email, jobTitle, skills, jobInterest } = req.body;
+
+    // Find the user in the database
+    const user = await req.models.User.findOne({ username });
+    if (!user) {
+      console.error(`User with username ${username} not found.`);
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
+    // Update the user details
+    user.firstName = firstName || user.firstName;
+    user.lastName = lastName || user.lastName;
+    user.email = email || user.email;
+    user.jobTitle = jobTitle || user.jobTitle;
+    user.skills = skills || user.skills;
+    user.jobInterest = jobInterest || user.jobInterest;
+
+    await user.save();
+    console.log("User updated successfully:", user);
+    res.status(200).json({ message: 'User updated successfully.' });
+  } catch (error) {
+    console.error("Error during user update:", error);
+    res.status(500).json({ message: 'Server error. Please try again later.' });
+  }
+
+});
+
 
 router.get('/profile', async (req, res) => {
   console.log("Session data:", req.session);
@@ -91,7 +122,6 @@ router.get('/jobInterests', async (req, res) => {
       res.status(500).json({ message: 'Server error. Please try again later.' });
   }
 });
-
 
 
 export default router;
