@@ -153,6 +153,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let jobOutput = document.getElementById('job-review-output').querySelector('textarea');
 
     beginButtonJob.addEventListener("click", () => {
+        jobOutput.placeholder = "Loading...";
         const message = `Here is my current resume: ${selectedResumeContent}. Here is the specific job I am looking into: ${selectedJobType}. Here is my skills: ${selectedSkills}`;
         const options = {
             method: 'POST',

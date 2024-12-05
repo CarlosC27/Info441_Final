@@ -120,6 +120,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
     beginButton.addEventListener('click', () => {
+        reivewOutput.placeholder = "Loading...";
         const resume = resumeTextInput.value.trim();
         const skills = userData.skills;
         let message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
