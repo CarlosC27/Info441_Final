@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', async () => {
     const finishReviewPopup = document.getElementById('finish-review-popup');
     let perplexityResponse;
     let reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
-
+    let userData;
    
     try {
         const response = await fetch('/api/user/profile'); 
         if (!response.ok) throw new Error('Failed to fetch user profile');
-        const userData = await response.json();
+        userData = await response.json();
         username = userData.username; 
         console.log('Logged-in username:', username);
     } catch (error) {
@@ -120,7 +120,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     beginButton.addEventListener('click', () => {
         const resume = resumeTextInput.value.trim();
-        const message = `Here is the resume content: ${resume}`
+        const skills = userData.skills;
+        const message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
+        if (specificJobs.length > 0) {
+            message += `. The jobs: ${specificJobs}`
+        }
         const options = {
             method: 'POST',
             headers: {
