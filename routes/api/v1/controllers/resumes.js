@@ -195,6 +195,7 @@ router.get('/past_job_reviews', async(req, res) => {
                 return ({ 
                     _id: review._id,
                     username: review.username,
+                    selectedResumeName: review.selectedResumeName,
                     selectedResume: review.selectedResume,
                     selectedJobType: review.selectedJobType,
                     selectedSkills: review.selectedSkills,
