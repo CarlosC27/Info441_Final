@@ -171,6 +171,9 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => {console.log(response);
             perplexityResponse = response.choices[0].message.content;
             jobOutput.placeholder = perplexityResponse;
+            jobOutput.value = perplexityResponse; 
+            adjustTextareaHeight(jobOutput); 
+
         })
         .catch(err => console.error(err));
     })
@@ -264,4 +267,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById("close-job-popup").addEventListener("click", () => {
         hidePopup("upload-job-popup-job-page");
     });
+
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto'; 
+        textarea.style.height = textarea.scrollHeight + 'px'; 
+    }
+    
 });

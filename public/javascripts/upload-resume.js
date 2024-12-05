@@ -151,6 +151,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         .then(response => {console.log(response);
             perplexityResponse = response.choices[0].message.content;
             reivewOutput.placeholder = perplexityResponse;
+            reivewOutput.value = perplexityResponse; 
+            adjustTextareaHeight(reivewOutput); 
         })
         .catch(err => console.error(err));
     })
@@ -211,4 +213,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.classList.add('hidden');
         finishReviewPopup.style.display = 'none';
     });    
+
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto'; 
+        textarea.style.height = textarea.scrollHeight + 'px'; 
+    }
 });
