@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="A basic HTML template">
     <title>RÉVISEMÉ</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./stylesheets/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baskervville:ital@0;1&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
 </head>
@@ -18,27 +18,97 @@
     </header>
     <main class="new-job-review-main">
         <div class="new-job-review-buttons-container">
+            <!-- Buttons to trigger popups -->
             <div class="new-job-description-button-container">
-                <div class="link-button"><a href="">+ Upload Job Description</a></div>
+                <button id="upload-job-description-btn" class="gold-button">+ Upload Job Description</button>
             </div>
             <div class="select-types-container">
-                <div class="link-button"><a href="">Select Resume</a></div>
-                <div class="link-button"><a href="">Select Job Type</a></div>
-                <div class="link-button"><a href="">Select Skils</a></div>
+                <button id="select-resume-btn" class="gold-button">Select Resume</button>
+                <button id="select-job-type-btn" class="gold-button">Select Job Type</button>
+                <button id="select-skills-btn" class="gold-button">Select Skills</button>
             </div>
             <div class="begin-button-container">
-                <button class="gold-button">Begin Review</button>
+                <button id="beginButtonJob" class="gold-button">Begin Review</button>
             </div>
         </div>
-        <div class="LLM-Output">
-            <p>Output Textbox</p>
-        </div>
-        <div class="chat-bot-widget">
-            <button class="chat-btn"><img src="./Assets/chat-bot.png" alt=""/> Begin Chat</button>
+        <div class="output-and-button">
+            <div class="review-output" id="job-review-output">
+                <textarea class="LLM-Output" rows="5" cols="40" placeholder="Output Textbox...waiting for input"></textarea>
+            </div>
+            <div class="chat-bot-widget">
+                <button class="chat-btn"><img src="./Assets/chat-bot.png" alt=""/> Begin Chat</button>
+            </div>
+
+            <div class="finish-button-container">
+                <button id="finish-review-btn" class="gold-button">Finish Review</button>
+            </div>
         </div>
     </main>
     <footer>
         <!-- <p>&copy; 2024 RÉVISEMÉ. All rights reserved.</p> -->
     </footer>
+
+    <!-- Popups -->
+    <div id="upload-job-popup-job-page" class="popup-job-page hidden">
+        <div class="popup-content">
+            <h2>Upload Job Description</h2>
+            <div class="job-description-box">
+                <textarea id="job-description" placeholder="Enter Job Description"></textarea>
+            </div>
+            <div class="popup-buttons">
+                <button id="save-job-btn" class="gold-button">Save</button>
+                <button id="close-job-popup" class="gold-button">Close</button>
+            </div>
+        </div>
+    </div>
+    
+
+        <div id="resume-popup-job-page" class="popup-job-page hidden">
+            <div class="popup-content">
+                <h2>Select Resume</h2>
+                <div id="resume-list-container"></div>
+                <button id="close-resume-popup" class="gold-button">Close</button>
+            </div>
+        </div>
+        
+    
+    <!-- Hidden input to store the selected resume -->
+    <input type="hidden" id="selected-resume" name="selectedResume">
+    
+    <div id="job-type-popup-job-page" class="popup-job-page hidden">
+        <div class="popup-content">
+            <h2>Select Job Type</h2>
+            <div id="job-type-list-container"></div>
+            <button id="close-job-type-popup" class="gold-button">Close</button>
+        </div>
+    </div>
+    
+
+    <div id="skills-popup-job-page" class="popup-job-page hidden">
+        <div class="popup-content">
+            <h2>Select Skills</h2>
+            <div id="skills-list-container"></div>
+            <button id="close-skills-popup" class="gold-button">Close</button>
+        </div>
+    </div>
+    
+    
+    
+    
+
+    <div id="finish-review-popup" class="popup hidden">
+        <div class="popup-content">
+            <h2>Save As</h2>
+            <div class="save-as-container">
+                <input type="text" id="review-name" placeholder="Enter Job Review Name">
+            </div>
+            <div class="popup-buttons">
+                <button id="save-review" class="gold-button">Save</button>
+                <button id="close-finish-popup" class="gold-button">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="./javascripts/job-review.js"></script>
 </body>
 </html>

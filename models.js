@@ -44,13 +44,36 @@ try {
         favorited: { type: Boolean, default: false },
         resumeReviewName: String
     }, {timestamps:true});
+
+    const jobReviewSchema = new mongoose.Schema({
+        username: String,
+        selectedResumeName: String,
+        selectedResume: String,
+        selectedJobType: String,
+        selectedSkills: [String],
+        jobReviewOutput: String,
+        jobReviewName: String,
+
+    }, {timestamps:true});
+
+    const plainResumeSchema = new mongoose.Schema({
+        username: String,
+        resumeName: String,
+        favorited: { type: Boolean, default: false },
+        resume: String
+    }, {timestamps:true});
+    
+
     
     
     
     models.User = mongoose.model('User', userSchema);
     models.Resume = mongoose.model('Resume', resumeSchema);
-    models.simpleReview = mongoose.model('SimpleReview', simpleReviewSchema)
-    models.SpecifcReview = mongoose.model('SpecificReview', specificReviewSchema)
+    models.simpleReview = mongoose.model('SimpleReview', simpleReviewSchema);
+    models.SpecifcReview = mongoose.model('SpecificReview', specificReviewSchema);
+    models.JobReview = mongoose.model('JobReview', jobReviewSchema);
+    models.PlainResume = mongoose.model('PlainResume', plainResumeSchema);
+    
     
 } catch (error) {
     console.log(error);

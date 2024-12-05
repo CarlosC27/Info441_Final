@@ -21,12 +21,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resumeTextInput = document.getElementById('resume-text');
     const reviewNameInput = document.getElementById('review-name');
     const finishReviewPopup = document.getElementById('finish-review-popup');
-
+    const beginButton = document.getElementById('beginButton');
+    let perplexityResponse;
+    let reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
+    let userData;
    
     try {
         const response = await fetch('/api/user/profile'); 
         if (!response.ok) throw new Error('Failed to fetch user profile');
-        const userData = await response.json();
+        userData = await response.json();
         username = userData.username; 
         console.log('Logged-in username:', username);
     } catch (error) {
@@ -116,36 +119,68 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.style.display = 'block';
     });
 
+    beginButton.addEventListener('click', () => {
+        const resume = resumeTextInput.value.trim();
+        const skills = userData.skills;
+        const message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
+        if (specificJobs.length > 0) {
+            message += `. The jobs: ${specificJobs}`
+        }
+        const options = {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer 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',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "llama-3.1-sonar-large-128k-online",
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description and skills."
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+            })
+          };
+        fetch('https://api.perplexity.ai/chat/completions', options)
+        .then(response => response.json())
+        .then(response => {console.log(response);
+            perplexityResponse = response.choices[0].message.content;
+            reivewOutput.placeholder = perplexityResponse;
+            reivewOutput.value = perplexityResponse; 
+            adjustTextareaHeight(reivewOutput); 
+        })
+        .catch(err => console.error(err));
+    })
+
    
     saveReviewButton.addEventListener('click', async () => {
         const reviewName = reviewNameInput.value.trim();
-
-        if (!reviewName) {
-            alert('Please enter a name for the review.');
-            return;
-        }
-
         const resumeName = resumeNameInput.value.trim();
         const resume = resumeTextInput.value.trim();
-
-        if (!resumeName || !resume) {
-            alert('Resume data is incomplete.');
+    
+        if (!reviewName || !resumeName || !resume) {
+            alert('Please fill out all fields (review name, resume name, and content).');
             return;
         }
-
+    
         const dataToSave = {
             username, 
             resumeName,
             resume,
             resumeReviewName: reviewName,
             favorited: isFavorited,
-            output: 'Output text here...',
+            output: perplexityResponse,
         };
-
+    
         if (selectedSchema === 'specific') {
             dataToSave.specificJobs = specificJobs;
         }
-
+    
         try {
             const response = await fetch(`/api/resumes/${selectedSchema}`, {
                 method: 'POST',
@@ -154,27 +189,33 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(dataToSave),
             });
-
+    
             if (response.ok) {
                 const result = await response.json();
-                alert(`Review saved successfully! Review ID: ${result.id}`);
-
+                alert(`Review and resume saved successfully! Review ID: ${result.id}`);
+    
                 resumeNameInput.value = '';
                 resumeTextInput.value = '';
                 reviewNameInput.value = '';
                 isFavorited = false;
                 starIcon.textContent = '☆';
                 specificJobs = [];
+                reivewOutput = '';
                 console.log('Local data cleared.');
             } else {
-                throw new Error('Failed to save review.');
+                throw new Error('Failed to save review and resume.');
             }
         } catch (error) {
-            console.error('Error saving review:', error);
-            alert('An error occurred while saving your review. Please try again.');
+            console.error('Error saving review and resume:', error);
+            alert('An error occurred while saving your review and resume. Please try again.');
         }
-
+    
         finishReviewPopup.classList.add('hidden');
         finishReviewPopup.style.display = 'none';
-    });
+    });    
+
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto'; 
+        textarea.style.height = textarea.scrollHeight + 'px'; 
+    }
 });
