@@ -171,7 +171,7 @@ router.get('/resumesList', async (req, res) => {
 
 router.post('/jobReview', async (req, res) => {
     try {
-        const { username, selectedResumeName, selectedResume, selectedJobType, selectedSkills, jobReviewName } = req.body;
+        const { username, selectedResumeName, selectedResume, selectedJobType, selectedSkills, jobReviewOutput, jobReviewName } = req.body;
 
         if (!username || !selectedResumeName || !selectedResume || !selectedJobType || !jobReviewName || selectedSkills.length === 0) {
             return res.status(400).json({ message: 'All required fields must be provided.' });
@@ -183,7 +183,7 @@ router.post('/jobReview', async (req, res) => {
             selectedResume,
             selectedJobType,
             selectedSkills,
-            jobReviewOutput: "", 
+            jobReviewOutput, 
             jobReviewName,
         });
 
