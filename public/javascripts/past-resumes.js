@@ -65,18 +65,30 @@ async function loadResumes(){
     try {
         console.log("HELLO");
         const resumeJson = await fetch('api/resumes/past_resumes',  { credentials: 'include' });
+        const resumeData = await resumeJson.json();
         console.log("response status is "+ resumeJson.ok);
 
-        let reumeHtml = resumeJson.map(resumeInfo => {
+        resumeData.forEach(skill => {
+            console.log("skill " + skill.username);
+        });
+        
+        let reumeHtml = (Array.isArray(resumeJson) ? resumeJson : []).map(resumeJson => {
             return `
             <div class="resume">
-                ${escapeHTML(resumeInfo.username)}
-                ${resumeInfo.resumeName}
-                ${resumeInfo.resume}
-                <div><a href="/userInfo.html?user=${encodeURIComponent(resumeInfo.username)}">${escapeHTML(resumeInfo.username)}</a>, ${escapeHTML(resumeInfo.createdAt)}</div>
-
-            </div>`
+                <div>Username: ${escapeHTML(resumeInfo.username)}</div>
+                <div>Resume Name: ${escapeHTML(resumeInfo.resumeName)}</div>
+                <div>Resume: ${escapeHTML(resumeInfo.resume)}</div>
+                <div>Favorited: ${resumeInfo.favorited ? 'Yes' : 'No'}</div>
+                <div>
+                    <a href="/userInfo.html?user=${encodeURIComponent(resumeInfo.username)}">
+                        View ${escapeHTML(resumeInfo.username)}'s Profile
+                    </a>
+                </div>
+                <div>Created At: ${new Date(resumeInfo.createdAt).toLocaleString()}</div>
+            </div>`;
         }).join("\n");
+        
+        console.log("resume html is " + reumeHtml);
         document.getElementById("resume-content-container").innerHTML = reumeHtml;
     }
 
@@ -84,3 +96,5 @@ async function loadResumes(){
         console.error('Error loading user info:', error);
     }
 }
+
+document.addEventListener('DOMContentLoaded', init);

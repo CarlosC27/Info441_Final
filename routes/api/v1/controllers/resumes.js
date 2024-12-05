@@ -80,7 +80,7 @@ router.get('/past_resumes', async(req, res) => {
     let resumes;
     if (req.session.isAuthenticated) {
         // Find resume by specific user
-        resumes = await req.models.plainResume.find({ username: req.session.account.username });
+        resumes = await req.models.PlainResume.find({ username: req.session.account.username });
         console.log("hi")
         console.log(resumes)
     } else {
