@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const reviewNameInput = document.getElementById('review-name');
     const finishReviewPopup = document.getElementById('finish-review-popup');
     let perplexityResponse;
-    const reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
+    let reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
 
    
     try {
@@ -193,6 +193,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 isFavorited = false;
                 starIcon.textContent = '☆';
                 specificJobs = [];
+                reivewOutput = '';
                 console.log('Local data cleared.');
             } else {
                 throw new Error('Failed to save review and resume.');

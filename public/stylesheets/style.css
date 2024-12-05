@@ -583,3 +583,52 @@ width: 60%;
 .star-icon{
   cursor: pointer;
 }
+
+/* General Popup Styles */
+.popup-job-page {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the popup to center */
+  background-color: #2C3E50;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure it appears on top */
+  width: 80%;
+  max-width: 500px;
+  color: #fff;
+}
+
+.popup-job-page.hidden {
+  display: none !important;
+}
+
+.popup-job-page .popup-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.popup-job-page .popup-content button {
+  background-color: #D8C3A5;
+  color: #2C3E50;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.popup-job-page .popup-content button:hover {
+  background-color: #C2B2A2;
+}
+
+.popup-job-page .popup-content textarea {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+}

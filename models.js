@@ -47,6 +47,7 @@ try {
 
     const jobReviewSchema = new mongoose.Schema({
         username: String,
+        selectedResumeName: String,
         selectedResume: String,
         selectedJobType: String,
         selectedSkills: [String],
@@ -61,6 +62,7 @@ try {
         favorited: { type: Boolean, default: false },
         resume: String
     }, {timestamps:true});
+    
 
     
     
@@ -71,6 +73,7 @@ try {
     models.SpecifcReview = mongoose.model('SpecificReview', specificReviewSchema);
     models.JobReview = mongoose.model('JobReview', jobReviewSchema);
     models.PlainResume = mongoose.model('PlainResume', plainResumeSchema);
+    
     
 } catch (error) {
     console.log(error);
