@@ -21,6 +21,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resumeTextInput = document.getElementById('resume-text');
     const reviewNameInput = document.getElementById('review-name');
     const finishReviewPopup = document.getElementById('finish-review-popup');
+    let perplexityResponse;
+    const reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
 
    
     try {
@@ -116,6 +118,38 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.style.display = 'block';
     });
 
+    beginButton.addEventListener('click', () => {
+        const resume = resumeTextInput.value.trim();
+        const message = `Here is the resume content: ${resume}`
+        const options = {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer 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',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "llama-3.1-sonar-large-128k-online",
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description and skills."
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+            })
+          };
+        fetch('https://api.perplexity.ai/chat/completions', options)
+        .then(response => response.json())
+        .then(response => {console.log(response);
+            perplexityResponse = response.choices[0].message.content;
+            reivewOutput.placeholder = perplexityResponse;
+        })
+        .catch(err => console.error(err));
+    })
+
    
     saveReviewButton.addEventListener('click', async () => {
         const reviewName = reviewNameInput.value.trim();
@@ -133,7 +167,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             resume,
             resumeReviewName: reviewName,
             favorited: isFavorited,
-            output: 'Output text here...',
+            output: perplexityResponse,
         };
     
         if (selectedSchema === 'specific') {
