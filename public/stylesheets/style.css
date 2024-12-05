@@ -191,6 +191,7 @@ padding: 12px 20px;
 cursor: pointer;
 transition: background 0.3s;
 margin-top: 10px;
+margin-left: 10px;
 }
 
 .review-options label {
@@ -374,6 +375,36 @@ footer{
   font-family: 'Montserrat', Arial, Helvetica, sans-serif;
   font-weight: bolder;
 }
+
+/* edit profile*/
+
+.edit-profile-page-header, .register-profile-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.delete-button{
+  max-width: fit-content;
+  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
+  color: #2C3E50;
+  background: #D8C3A5;
+  border: none;
+  border-radius: 32px;
+  font-size: 15px;
+  padding: 5px 10px;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.edit-profile-container, .register-profile-container{
+  display: flex;
+  flex-direction: column;
+  margin-left: 300px;
+  width: 60%;
+}
+
 
 /* popup menu */
 

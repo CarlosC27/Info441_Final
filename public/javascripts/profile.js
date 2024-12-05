@@ -42,4 +42,13 @@ function updateProfilePage(user) {
             jobInterestContainer.appendChild(interestItem);
         });
     }
+
+    //navigate to the edit profile page for the user can edit their profile
+    const editProfileButton = document.querySelector('#editProfileButton');
+    if (editProfileButton) {
+        editProfileButton.style.cursor = 'pointer';
+        editProfileButton.addEventListener('click', () => {
+            window.location.href = '/edit-profile.html';
+        });
+    }
 }

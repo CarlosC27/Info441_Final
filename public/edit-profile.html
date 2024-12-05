@@ -103,20 +103,22 @@
     </header>
     <main class="edit-profile-main">
         <div class="edit-profile-container">
-            <!-- First and Last Name -->
+            <!-- First and Last Name and Email -->
             <div class="field-container">
-                <h2>First Name</h2>
+                <h2 class="edit-profile-First-Name">First Name</h2>
                 <input type="text" id="fname" name="fname" placeholder="First Name" />
-                <h2>Last Name</h2>
+                <button class="gold-button" id="updateFirstName">Update First Name</button>
+                <h2 class="edit-profile-Last-Name">Last Name</h2>
                 <input type="text" id="lname" name="lname" placeholder="Last Name" />
-                <h2>Email</h2>
+                <button class="gold-button" id="updateLastName">Update Last Name</button>
+                <h2 class="edit-profile-email">Email</h2>
                 <input type="text" id="userEmail" name="userEmail" placeholder="email" />
-                <button class="gold-button" id="updateInfo">Update Info</button>
+                <button class="gold-button" id="updateEmail">Update Email</button>
             </div>
 
             <!-- Job Title -->
             <div class="field-container">
-                <h2>Job Title</h2>
+                <h2 class="edit-profile-Job-Title">Job Title</h2>
                 <input type="text" id="jobTitle" name="jobTitle" placeholder="Job Title" />
                 <button class="gold-button" id="updateJobTitle">Update Job Title</button>
             </div>
@@ -130,27 +132,17 @@
             <!-- Skills -->
             <div class="field-container">
                 <h2>Skills</h2>
+                <div class="edit-skills-grid-container"></div>
                 <input type="text" id="newSkill" name="newSkill" placeholder="New Skill" />
                 <button class="gold-button" id="addSkill">Add To Skills</button>
-                <div class="hidden current-skills">
-                    <div>
-                        <a>TEMP SKILL</a>
-                        <button class="delete-button">Delete</button>
-                    </div>
-                </div>
             </div>
 
             <!-- Job Interests -->
             <div class="field-container">
                 <h2>Job Interest</h2>
+                <div class="edit-job-interest-grid-container"></div>
                 <input type="text" id="jobInterest" name="jobInterest" placeholder="New Job Interest" />
                 <button class="gold-button" id="addInterest">Add To Job Interests</button>
-                <div class="hidden current-interests">
-                    <div>
-                        <a>TEMP JOB INTEREST</a>
-                        <button class="delete-button">Delete</button>
-                    </div>
-                </div>
             </div>
 
             <!-- Save Profile -->
