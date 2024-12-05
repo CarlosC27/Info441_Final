@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let jobDescription = "";
     let reviewName = "";
     let username = "";
+    let perplexityResponse = "";
 
     const resumeListContainer = document.getElementById("resume-list-container");
     const jobTypeListContainer = document.getElementById("job-type-list-container");
@@ -140,6 +141,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const finishReviewButton = document.querySelector(".finish-button-container .gold-button");
     const closeFinishPopup = document.getElementById("close-finish-popup");
     const saveReviewButton = document.getElementById("save-review");
+    const beginButtonJob = document.getElementById('beginButtonJob');
+    let jobOutput = document.getElementById('job-review-output').querySelector('textarea');
+
+    beginButtonJob.addEventListener("click", () => {
+        const message = `Here is my current resume: ${selectedResumeContent}. Here is the specific job I am looking into: ${selectedJobType}. Here is my skills: ${selectedSkills}`;
+        const options = {
+            method: 'POST',
+            headers: {
+              Authorization: 'Bearer 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',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: "llama-3.1-sonar-large-128k-online",
+                messages: [
+                    {
+                        role: "system",
+                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description, skills, and current resume."
+                    },
+                    {
+                        role: "user",
+                        content: message
+                    }
+                ]
+            })
+          };
+        fetch('https://api.perplexity.ai/chat/completions', options)
+        .then(response => response.json())
+        .then(response => {console.log(response);
+            perplexityResponse = response.choices[0].message.content;
+            jobOutput.placeholder = perplexityResponse;
+        })
+        .catch(err => console.error(err));
+    })
 
     finishReviewButton.addEventListener("click", () => {
         if (!selectedResumeName || !selectedJobType || selectedSkills.length === 0) {
@@ -165,7 +199,7 @@ document.addEventListener('DOMContentLoaded', () => {
             selectedResume: selectedResumeContent,
             selectedJobType,
             selectedSkills,
-            jobReviewOutput: "",
+            jobReviewOutput: perplexityResponse,
             jobReviewName: reviewName,
         };
         try {
@@ -184,6 +218,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 jobDescription = "";
                 reviewName = "";
                 document.getElementById("review-name").value = "";
+                perplexityResponse = "";
             } else {
                 throw new Error("Failed to save review.");
             }

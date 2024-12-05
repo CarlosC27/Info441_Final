@@ -21,6 +21,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resumeTextInput = document.getElementById('resume-text');
     const reviewNameInput = document.getElementById('review-name');
     const finishReviewPopup = document.getElementById('finish-review-popup');
+    const beginButton = document.getElementById('beginButton');
     let perplexityResponse;
     let reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
     let userData;
