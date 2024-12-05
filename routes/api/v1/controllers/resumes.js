@@ -75,6 +75,54 @@ router.get('/review_results', async function(req, res, next) {
     }
 })
 
+router.get('/past_resumes', async(req, res) => {
+    console.log("calling from past resumes")
+    let resumes;
+    if (req.session.isAuthenticated) {
+        // Find resume by specific user
+        resumes = await req.models.plainResume.find({ username: req.session.account.username });
+        console.log("hi")
+        console.log(resumes)
+    } else {
+        // say user needs to login
+    }
+
+    let resumeData = await Promise.all(
+        resumes.map(async resume => { 
+            try {
+                return ({ 
+                    _id: resume._id,
+                    username: resume.username,
+                    resumeName: resume.resumeName,
+                    favorited: resume.favorited,
+                    resume: resume.resume,
+                    createdAt: resume.createdAt
+                });
+            } catch(error){
+                console.log(error)
+                res.send(500).json({"status": "error", "error": error})
+            }
+        })
+    );
+    console.log(resumeData);
+    res.json(resumeData);
+
+
+    // try {
+    //     let username = req.body.username;
+    //     const user = await models.User.find({ username: username});
+    //     if (!user) {
+    //         return res.status(404).json({ message: 'User not found' });
+    //     }
+    //     const pastResume = await models.PlainResume.find({ username: username })
+    //     console.log(pastResume)
+    //     res.send(pastResume);
+    // } catch (error) {
+    //     console.log(error);
+    //     res.send({ "status": "error", "error": error });
+    // }
+})
+
 router.post('/simple', async (req, res) => {
     try {
         const { username, resumeName, resume, resumeReviewName, favorited, output } = req.body;
