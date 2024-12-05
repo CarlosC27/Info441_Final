@@ -73,14 +73,14 @@ h1, h2, h3{
 /* homepage */
 
 
-.homepage-header, .upload-resume-header, .new-job-review-header{
+.homepage-header, .upload-resume-header, .new-job-review-header, .past-reviews-header, .past-resumes-header{
 display: flex;
 justify-content: space-between;
 padding: 20px;
 padding-top: 4px;
 }
 
-.homepage-title, .upload-new-resume-title, .new-job-review-title {
+.homepage-title, .upload-new-resume-title, .new-job-review-title, .past-reviews-title, .past-resumes-title {
 font-size: 4em;
 font-weight: 400;
 margin-bottom: 0;
@@ -164,7 +164,7 @@ padding-top: 8%;
 
 /* Upload New Resume */
 
-.upload-new-resume-buttons-container{
+.upload-new-resume-buttons-container, .past-resumes-container, .past-reviews-container{
 display: flex;
 flex-direction: column;
 margin-left: 300px;
@@ -191,6 +191,7 @@ padding: 12px 20px;
 cursor: pointer;
 transition: background 0.3s;
 margin-top: 10px;
+margin-left: 10px;
 }
 
 .review-options label {
@@ -204,8 +205,8 @@ cursor: pointer;
 
 }
 
-.LLM-Output{
-width: 60%;
+.LLM-Output{ 
+width: 75%;
 height: 100px;
 border: none;
 border-radius: 20px;
@@ -214,7 +215,23 @@ font-size: 1rem;
 color: #00274d;
 background-color: #f5f5f5;
 margin-top: 24px;
+overflow: hidden; 
+resize: none;
 }
+
+.LLM-Output-res{ 
+  width: 100%;
+  height: 100px;
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 1rem;
+  color: #00274d;
+  background-color: #f5f5f5;
+  margin-top: 24px;
+  overflow: hidden; 
+  resize: none;
+  }
 
 
 .upload-resume-button-container .link-button{
@@ -362,34 +379,6 @@ footer{
 /* edit profile*/
 
 .edit-profile-page-header, .register-profile-container{
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-}
-.delete-button{
-max-width: fit-content;
-font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-color: #2C3E50;
-background: #D8C3A5;
-border: none;
-border-radius: 32px;
-font-size: 15px;
-padding: 5px 10px;
-cursor: pointer;
-}
-
-.edit-profile-container, .register-profile-container{
-display: flex;
-flex-direction: column;
-margin-left: 300px;
-width: 60%;
-}
-
-
-/* edit profile*/
-
-.edit-profile-page-header, .register-profile-container{
   display: flex;
   align-items: center;
   justify-content: center;
@@ -404,6 +393,8 @@ width: 60%;
   border-radius: 32px;
   font-size: 15px;
   padding: 5px 10px;
+  margin-left: 10px;
+  margin-top: 10px;
   cursor: pointer;
 }
 
@@ -414,7 +405,8 @@ width: 60%;
   width: 60%;
 }
 
-/* pop ups */
+
+/* popup menu */
 
 /* Popup Styles */
 .popup {
@@ -582,4 +574,75 @@ width: 60%;
 
 .star-icon{
   cursor: pointer;
+}
+
+.large-label{
+  font-family: "Baskervville", Georgia, 'Times New Roman', Times, serif;
+  color: #D8C3A5;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.filter-drpodown{
+  font-family: "Baskervville", Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.3rem;
+  margin-left: 15px;
+}
+
+#past-resume-div{
+  background-color: #f9f9f9;
+  color: #2C3E50;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+/* General Popup Styles */
+.popup-job-page {
+  display: none; /* Initially hidden */
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Offset the popup to center */
+  background-color: #2C3E50;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+  z-index: 1000; /* Ensure it appears on top */
+  width: 80%;
+  max-width: 500px;
+  color: #fff;
+}
+
+.popup-job-page.hidden {
+  display: none !important;
+}
+
+.popup-job-page .popup-content h2 {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.popup-job-page .popup-content button {
+  background-color: #D8C3A5;
+  color: #2C3E50;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.popup-job-page .popup-content button:hover {
+  background-color: #C2B2A2;
+}
+
+.popup-job-page .popup-content textarea {
+  width: 100%;
+  height: 150px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
 }

@@ -21,14 +21,15 @@ document.addEventListener('DOMContentLoaded', async () => {
     const resumeTextInput = document.getElementById('resume-text');
     const reviewNameInput = document.getElementById('review-name');
     const finishReviewPopup = document.getElementById('finish-review-popup');
+    const beginButton = document.getElementById('beginButton');
     let perplexityResponse;
-    const reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
-
+    let reivewOutput = document.getElementById('resume-review-output').querySelector('textarea');
+    let userData;
    
     try {
         const response = await fetch('/api/user/profile'); 
         if (!response.ok) throw new Error('Failed to fetch user profile');
-        const userData = await response.json();
+        userData = await response.json();
         username = userData.username; 
         console.log('Logged-in username:', username);
     } catch (error) {
@@ -120,7 +121,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     beginButton.addEventListener('click', () => {
         const resume = resumeTextInput.value.trim();
-        const message = `Here is the resume content: ${resume}`
+        const skills = userData.skills;
+        let message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
+        if (specificJobs.length > 0) {
+            message += `. The jobs: ${specificJobs}`
+        }
         const options = {
             method: 'POST',
             headers: {
@@ -132,7 +137,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 messages: [
                     {
                         role: "system",
-                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description and skills."
+                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job type and and selected skills."
                     },
                     {
                         role: "user",
@@ -146,6 +151,8 @@ document.addEventListener('DOMContentLoaded', async () => {
         .then(response => {console.log(response);
             perplexityResponse = response.choices[0].message.content;
             reivewOutput.placeholder = perplexityResponse;
+            reivewOutput.value = perplexityResponse; 
+            adjustTextareaHeight(reivewOutput); 
         })
         .catch(err => console.error(err));
     })
@@ -193,6 +200,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 isFavorited = false;
                 starIcon.textContent = '☆';
                 specificJobs = [];
+                reivewOutput = '';
                 console.log('Local data cleared.');
             } else {
                 throw new Error('Failed to save review and resume.');
@@ -205,4 +213,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.classList.add('hidden');
         finishReviewPopup.style.display = 'none';
     });    
+
+    function adjustTextareaHeight(textarea) {
+        textarea.style.height = 'auto'; 
+        textarea.style.height = textarea.scrollHeight + 'px'; 
+    }
 });

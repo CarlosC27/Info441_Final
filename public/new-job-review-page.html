@@ -28,7 +28,7 @@
                 <button id="select-skills-btn" class="gold-button">Select Skills</button>
             </div>
             <div class="begin-button-container">
-                <button class="gold-button">Begin Review</button>
+                <button id="beginButtonJob" class="gold-button">Begin Review</button>
             </div>
         </div>
         <div class="output-and-button">
@@ -49,7 +49,7 @@
     </footer>
 
     <!-- Popups -->
-    <div id="upload-job-popup" class="popup hidden">
+    <div id="upload-job-popup-job-page" class="popup-job-page hidden">
         <div class="popup-content">
             <h2>Upload Job Description</h2>
             <div class="job-description-box">
@@ -61,42 +61,40 @@
             </div>
         </div>
     </div>
+    
 
-    <div id="select-resume-popup" class="popup hidden">
-        <div class="popup-content">
-            <h2>Select Resume</h2>
-            <form id="skills-list-container" class="review-options-container">
-                
-            </form>
-            <div class="popup-buttons">
+        <div id="resume-popup-job-page" class="popup-job-page hidden">
+            <div class="popup-content">
+                <h2>Select Resume</h2>
+                <div id="resume-list-container"></div>
                 <button id="close-resume-popup" class="gold-button">Close</button>
             </div>
         </div>
-    </div>
-
-    <div id="select-job-type-popup" class="popup hidden">
+        
+    
+    <!-- Hidden input to store the selected resume -->
+    <input type="hidden" id="selected-resume" name="selectedResume">
+    
+    <div id="job-type-popup-job-page" class="popup-job-page hidden">
         <div class="popup-content">
             <h2>Select Job Type</h2>
-            <form id="job-type-list-container" class="review-options-container">
-                
-            </form>
-            <div class="popup-buttons">
-                <button id="close-job-type-popup" class="gold-button">Close</button>
-            </div>
+            <div id="job-type-list-container"></div>
+            <button id="close-job-type-popup" class="gold-button">Close</button>
         </div>
     </div>
+    
 
-    <div id="select-skils-popup" class="popup hidden">
+    <div id="skills-popup-job-page" class="popup-job-page hidden">
         <div class="popup-content">
-            <h2>Skils:</h2>
-            <form id="skills-list-container" class="review-options-container">
-                
-            </form>
-            <div class="popup-buttons">
-                <button id="close-skills-list-popup" class="gold-button">Close</button>
-            </div>
+            <h2>Select Skills</h2>
+            <div id="skills-list-container"></div>
+            <button id="close-skills-popup" class="gold-button">Close</button>
         </div>
     </div>
+    
+    
+    
+    
 
     <div id="finish-review-popup" class="popup hidden">
         <div class="popup-content">
