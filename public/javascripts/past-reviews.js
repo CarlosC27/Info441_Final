@@ -31,21 +31,30 @@ async function loadReviews(){
 
                 const divContainer = document.querySelector('.' + divClass)
 
-                const userName = document.createElement('p');
-                userName.textContent = "Username: " + review.username;
-                divContainer.appendChild(userName);
-
-                const resumeReviewName = document.createElement('p');
-                resumeReviewName.textContent = "Resume Title: " + review.resumeReviewName;
-                divContainer.appendChild(resumeReviewName);
-
                 const resumeName = document.createElement('p');
                 resumeName.textContent = "Review: " + review.resumeName;
                 divContainer.appendChild(resumeName);
 
-                const date = document.createElement('p');
-                date.textContent = "Date: " + review.createdAt;
-                divContainer.appendChild(date);
+                const divStarClass = "div-star-simple-" + index;
+                const divStar = document.createElement('div');
+                divStar.className = divStarClass;
+                divStar.id = "star-resume-title"
+                divContainer.appendChild(divStar);
+
+                const divStarContainer = document.querySelector('.' + divStarClass)
+                
+                const star = document.createElement('a');
+                if(review.favorited) {
+                    star.textContent = "★  ";
+                } else{
+                    star.textContent = "☆  ";
+                }
+                
+                divStarContainer.appendChild(star);
+
+                const resumeReviewName = document.createElement('a');
+                resumeReviewName.textContent = "Resume Title: " + review.resumeReviewName;
+                divStarContainer.appendChild(resumeReviewName);
 
                 const resumeContent = document.createElement('p');
                 resumeContent.textContent = "Resume: " + review.resume;
@@ -54,6 +63,14 @@ async function loadReviews(){
                 const output = document.createElement('p');
                 output.textContent = "Feedback: " + review.output;
                 divContainer.appendChild(output);
+
+                const userName = document.createElement('p');
+                userName.textContent = "Username: " + review.username;
+                divContainer.appendChild(userName);
+
+                const date = document.createElement('p');
+                date.textContent = "Date: " + review.createdAt;
+                divContainer.appendChild(date);
             });
 
             specificeReviewData.forEach((review, index) => {
@@ -67,21 +84,30 @@ async function loadReviews(){
 
                 const divContainer = document.querySelector('.' + divClass)
 
-                const userName = document.createElement('p');
-                userName.textContent = "Username: " + review.username;
-                divContainer.appendChild(userName);
-
                 const resumeReviewName = document.createElement('p');
                 resumeReviewName.textContent = "Review: " + review.resumeReviewName;
                 divContainer.appendChild(resumeReviewName);
 
-                const resumeName = document.createElement('p');
-                resumeName.textContent = "Resume Title: " + review.resumeName;
-                divContainer.appendChild(resumeName);
+                const divStarClass = "div-star-specific-" + index;
+                const divStar = document.createElement('div');
+                divStar.className = divStarClass;
+                divStar.id = "star-resume-title"
+                divContainer.appendChild(divStar);
 
-                const date = document.createElement('p');
-                date.textContent = "Date: " + review.createdAt;
-                divContainer.appendChild(date);
+                const divStarContainer = document.querySelector('.' + divStarClass)
+                
+                const star = document.createElement('a');
+                if(review.favorited) {
+                    star.textContent = "★  ";
+                } else{
+                    star.textContent = "☆  ";
+                }
+                
+                divStarContainer.appendChild(star);
+
+                const resumeName = document.createElement('a');
+                resumeName.textContent = "Resume Title: " + review.resumeName;
+                divStarContainer.appendChild(resumeName);
 
                 const specificJobs = document.createElement('p');
                 specificJobs.textContent = "Job: " + review.specificJobs;
@@ -94,6 +120,14 @@ async function loadReviews(){
                 const output = document.createElement('p');
                 output.textContent = "Feedback: " + review.output;
                 divContainer.appendChild(output);
+
+                const userName = document.createElement('p');
+                userName.textContent = "Username: " + review.username;
+                divContainer.appendChild(userName);
+
+                const date = document.createElement('p');
+                date.textContent = "Date: " + review.createdAt;
+                divContainer.appendChild(date);
             });
 
             jobReviewData.forEach((review, index) => {
@@ -107,17 +141,13 @@ async function loadReviews(){
 
                 const divContainer = document.querySelector('.' + divClass)
 
-                const userName = document.createElement('p');
-                userName.textContent = "Username: " + review.username;
-                divContainer.appendChild(userName);
-
                 const jobReviewName = document.createElement('p');
-                jobReviewName.textContent = "Review: " + review.jobReviewName;
+                jobReviewName.textContent = "Review Title: " + review.jobReviewName;
                 divContainer.appendChild(jobReviewName);
 
-                const date = document.createElement('p');
-                date.textContent = "Date: " + review.createdAt;
-                divContainer.appendChild(date);
+                const selectedResumeName = document.createElement('p');
+                jobReviewName.textContent = "Resume Title: " + review.selectedResumeName;
+                divContainer.appendChild(selectedResumeName);
 
                 const selectedResume = document.createElement('p');
                 selectedResume.textContent = "Resume: " + review.selectedResume;
@@ -134,6 +164,14 @@ async function loadReviews(){
                 const jobReviewOutput = document.createElement('p');
                 jobReviewOutput.textContent = "Feedback: " + review.jobReviewOutput;
                 divContainer.appendChild(jobReviewOutput);
+
+                const userName = document.createElement('p');
+                userName.textContent = "Username: " + review.username;
+                divContainer.appendChild(userName);
+
+                const date = document.createElement('p');
+                date.textContent = "Date: " + review.createdAt;
+                divContainer.appendChild(date);
             });
         }
     }
