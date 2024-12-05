@@ -251,6 +251,17 @@ margin-top: 16px;
   grid-template-columns: repeat(3, 1fr); /* 3 equal columns */
   gap: 10px; /* Adjust spacing between items */
 }
+.job-description-box{
+  padding-right: 20px;
+}
+
+.output-and-button{
+  margin-left: 300px;
+}
+
+.select-types-container{
+  padding-bottom: 16px;
+}
 
 .new-job-review-buttons-container .link-button{
   max-width: fit-content;

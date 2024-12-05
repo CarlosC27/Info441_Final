@@ -119,20 +119,14 @@ document.addEventListener('DOMContentLoaded', async () => {
    
     saveReviewButton.addEventListener('click', async () => {
         const reviewName = reviewNameInput.value.trim();
-
-        if (!reviewName) {
-            alert('Please enter a name for the review.');
-            return;
-        }
-
         const resumeName = resumeNameInput.value.trim();
         const resume = resumeTextInput.value.trim();
-
-        if (!resumeName || !resume) {
-            alert('Resume data is incomplete.');
+    
+        if (!reviewName || !resumeName || !resume) {
+            alert('Please fill out all fields (review name, resume name, and content).');
             return;
         }
-
+    
         const dataToSave = {
             username, 
             resumeName,
@@ -141,11 +135,11 @@ document.addEventListener('DOMContentLoaded', async () => {
             favorited: isFavorited,
             output: 'Output text here...',
         };
-
+    
         if (selectedSchema === 'specific') {
             dataToSave.specificJobs = specificJobs;
         }
-
+    
         try {
             const response = await fetch(`/api/resumes/${selectedSchema}`, {
                 method: 'POST',
@@ -154,11 +148,11 @@ document.addEventListener('DOMContentLoaded', async () => {
                 },
                 body: JSON.stringify(dataToSave),
             });
-
+    
             if (response.ok) {
                 const result = await response.json();
-                alert(`Review saved successfully! Review ID: ${result.id}`);
-
+                alert(`Review and resume saved successfully! Review ID: ${result.id}`);
+    
                 resumeNameInput.value = '';
                 resumeTextInput.value = '';
                 reviewNameInput.value = '';
@@ -167,14 +161,14 @@ document.addEventListener('DOMContentLoaded', async () => {
                 specificJobs = [];
                 console.log('Local data cleared.');
             } else {
-                throw new Error('Failed to save review.');
+                throw new Error('Failed to save review and resume.');
             }
         } catch (error) {
-            console.error('Error saving review:', error);
-            alert('An error occurred while saving your review. Please try again.');
+            console.error('Error saving review and resume:', error);
+            alert('An error occurred while saving your review and resume. Please try again.');
         }
-
+    
         finishReviewPopup.classList.add('hidden');
         finishReviewPopup.style.display = 'none';
-    });
+    });    
 });
