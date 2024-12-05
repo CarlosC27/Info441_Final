@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Upload and Review Resume">
+    <title>RÉVISEMÉ</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+</head>
+<body class="upload-new-resume-page">
+    <header class="upload-resume-header">
+        <h1 class="upload-new-resume-title">Upload New Resume</h1>
+        <div class="profile">
+            <img src="./Assets/profile-picture-icon.png" alt="Profile Picture" class="profile-picture">
+        </div>
+    </header>
+    <main class="upload-new-resume-main">
+        <div class="upload-new-resume-buttons-container">
+            <!-- Upload Resume Button -->
+            <div class="upload-resume-button-container">
+                    <button id="show-resume-upload-popup" class="gold-button">+ Upload New Resume</button>
+            </div>
+            
+            <!-- Review Options -->
+            <div class="review-options">
+                <label>
+                    <input type="radio" name="review-type" value="simple">
+                    Simple Review
+                </label>
+                <label>
+                    <input type="radio" name="review-type" value="specific">
+                    Specific Review
+                </label>
+            </div>
+
+            <!-- Begin Review Button -->
+            <div class="begin-button-container">
+                <button id="beginButton" class="gold-button">Begin Review</button>
+            </div>
+
+            <div class="review-output" id="resume-review-output">
+                <textarea class="LLM-Output" rows="5" cols="40" placeholder="Output Textbox...waiting for input"></textarea>
+            </div>
+    
+            <div class="finish-button-container">
+                <button class="gold-button">Finish Review</button>
+            </div>
+        </div>
+
+      
+        <!-- <div class="LLM-Output">
+            <p>Output Textbox</p>
+        </div> -->
+
+        <!-- Specific Review Popup -->
+        <div id="specific-review-popup" class="popup hidden">
+            <div class="popup-content">
+                <h2>Review For</h2>
+                <form id="job-interests-container" class="review-options-container">
+                    <!-- Dynamically populated job interests will appear here -->
+                </form>
+                <div class="popup-buttons">
+                    <button id="close-specific-popup" class="gold-button">Close</button>
+                </div>
+            </div>
+        </div>
+        
+<!-- Upload New Resume Popup -->
+<div id="resume-upload-popup" class="popup hidden">
+    <div class="popup-content">
+        <h2>Upload Resume</h2>
+        <div class="resume-header">
+            <input type="text" id="resume-name" placeholder="Resume Name">
+            <div class="star-icon" id="star-icon">☆</div>
+        </div>
+        <div class="resume-input">
+            <textarea id="resume-text" placeholder="Enter your resume here"></textarea>
+        </div>
+        <div class="popup-buttons">
+            <button id="save-resume" class="gold-button">Save</button>
+            <button id="close-resume-popup" class="gold-button">Close</button>
+        </div>
+    </div>
+</div>
+
+<div id="finish-review-popup" class="popup hidden">
+    <div class="popup-content">
+        <h2>Save As</h2>
+        <div class="save-as-container">
+            <input type="text" id="review-name" placeholder="Enter Resume Review Name">
+        </div>
+        <div class="popup-buttons">
+            <button id="save-review" class="gold-button">Save</button>
+            <button id="close-finish-popup" class="gold-button">Cancel</button>
+        </div>
+    </div>
+</div>
+
+
+
+    </main>
+    <footer>
+        <!-- Footer -->
+    </footer>
+    <script src="./javascripts/upload-resume.js"></script>
+</body>
+</html>
+
