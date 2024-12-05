@@ -214,6 +214,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.style.display = 'none';
     });    
 
+    const profilePicture = document.querySelector('#profileDiv');
+    if (profilePicture) {
+        profilePicture.style.cursor = 'pointer';
+        profilePicture.addEventListener('click', () => {
+            window.location.href = '/homepage.html';
+        });
+    }
+
     function adjustTextareaHeight(textarea) {
         textarea.style.height = 'auto'; 
         textarea.style.height = textarea.scrollHeight + 'px'; 

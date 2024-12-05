@@ -39,6 +39,14 @@ async function loadResumes(){
     
             });
         }
+
+        const profilePicture = document.querySelector('#profileDiv');
+        if (profilePicture) {
+            profilePicture.style.cursor = 'pointer';
+            profilePicture.addEventListener('click', () => {
+                window.location.href = '/homepage.html';
+            });
+        }
     }
     catch (error) {
         console.error('Error loading user info:', error);

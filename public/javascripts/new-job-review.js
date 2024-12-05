@@ -6,6 +6,14 @@ document.addEventListener('DOMContentLoaded', async () => {
     const saveJobDescriptionButton = document.getElementById('save-job-description');
     const jobNameInput = document.getElementById('job-name');
     const jobTextInput = document.getElementById('job-description-text');
+
+    const profilePicture = document.querySelector('#profileDiv');
+    if (profilePicture) {
+        profilePicture.style.cursor = 'pointer';
+        profilePicture.addEventListener('click', () => {
+            window.location.href = '/homepage.html';
+        });
+    }
     
     
     try {
@@ -50,6 +58,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
     }
 });
+
 
 useSkills = []
 

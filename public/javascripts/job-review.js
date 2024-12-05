@@ -8,6 +8,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let username = "";
     let perplexityResponse = "";
 
+    const profilePicture = document.querySelector('#profileDiv');
+    if (profilePicture) {
+        profilePicture.style.cursor = 'pointer';
+        profilePicture.addEventListener('click', () => {
+            window.location.href = '/homepage.html';
+        });
+    }
+
     const resumeListContainer = document.getElementById("resume-list-container");
     const jobTypeListContainer = document.getElementById("job-type-list-container");
     const skillsListContainer = document.getElementById("skills-list-container");
