@@ -11,12 +11,12 @@ router.post('/upload_resume', async function(req, res, next) {
             // let user = req.session.account.username;
             const { resume, job_description, username, filtered_user_skills } = req.body;
             const apiKey = process.env.PERPLEXITY_API_KEY; 
-            const apiUrl = "https://api.perplexity.ai/v1/chat/completions";
+            const apiUrl = "https://api.perplexity.ai/chat/completions";
 
             const messages = [
                 {
                     role: "system",
-                    content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description and skills."
+                    content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Modify the given resume to highlight skills mentioned in the job description. Return only the modified resume content."
                 },
                 {
                     role: "user",
@@ -35,9 +35,9 @@ router.post('/upload_resume', async function(req, res, next) {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log('Modified Resume:', response.data);
+            console.log('Modified Resume:', response.data.choices[0].message.content);
 
-            const modifiedResumeText = response.data.text;
+            const modifiedResumeText = response.data.choices[0].message.content;
 
             const newResume = new models.Resume({
                 resume: resume,
