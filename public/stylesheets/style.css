@@ -73,14 +73,14 @@ h1, h2, h3{
 /* homepage */
 
 
-.homepage-header, .upload-resume-header, .new-job-review-header{
+.homepage-header, .upload-resume-header, .new-job-review-header, .past-reviews-header, .past-resumes-header{
 display: flex;
 justify-content: space-between;
 padding: 20px;
 padding-top: 4px;
 }
 
-.homepage-title, .upload-new-resume-title, .new-job-review-title {
+.homepage-title, .upload-new-resume-title, .new-job-review-title, .past-reviews-title, .past-resumes-title {
 font-size: 4em;
 font-weight: 400;
 margin-bottom: 0;
@@ -164,7 +164,7 @@ padding-top: 8%;
 
 /* Upload New Resume */
 
-.upload-new-resume-buttons-container{
+.upload-new-resume-buttons-container, .past-resumes-container, .past-reviews-container{
 display: flex;
 flex-direction: column;
 margin-left: 300px;
@@ -375,62 +375,7 @@ footer{
   font-weight: bolder;
 }
 
-/* edit profile*/
-
-.edit-profile-page-header, .register-profile-container{
-display: flex;
-align-items: center;
-justify-content: center;
-padding: 20px;
-}
-.delete-button{
-max-width: fit-content;
-font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-color: #2C3E50;
-background: #D8C3A5;
-border: none;
-border-radius: 32px;
-font-size: 15px;
-padding: 5px 10px;
-cursor: pointer;
-}
-
-.edit-profile-container, .register-profile-container{
-display: flex;
-flex-direction: column;
-margin-left: 300px;
-width: 60%;
-}
-
-
-/* edit profile*/
-
-.edit-profile-page-header, .register-profile-container{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-.delete-button{
-  max-width: fit-content;
-  font-family: 'Montserrat', Arial, Helvetica, sans-serif;
-  color: #2C3E50;
-  background: #D8C3A5;
-  border: none;
-  border-radius: 32px;
-  font-size: 15px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-.edit-profile-container, .register-profile-container{
-  display: flex;
-  flex-direction: column;
-  margin-left: 300px;
-  width: 60%;
-}
-
-/* pop ups */
+/* popup menu */
 
 /* Popup Styles */
 .popup {
@@ -598,6 +543,28 @@ width: 60%;
 
 .star-icon{
   cursor: pointer;
+}
+
+.large-label{
+  font-family: "Baskervville", Georgia, 'Times New Roman', Times, serif;
+  color: #D8C3A5;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+}
+
+.filter-drpodown{
+  font-family: "Baskervville", Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.3rem;
+  margin-left: 15px;
+}
+
+#past-resume-div{
+  background-color: #f9f9f9;
+  color: #2C3E50;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
 }
 
 /* General Popup Styles */
