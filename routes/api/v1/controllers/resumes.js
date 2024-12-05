@@ -230,7 +230,7 @@ router.post('/simple', async (req, res) => {
         });
 
         const savedReview = await newReview.save();
-        
+
         const plainResume = new models.PlainResume({
             username,
             resumeName,
@@ -279,6 +279,59 @@ router.post('/specific', async (req, res) => {
         res.status(201).json({ message: 'Specific review and plain resume saved successfully', id: savedReview._id });
     } catch (error) {
         console.error('Error saving specific review and plain resume:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.get('/resumesList', async (req, res) => {
+    if (!req.session || !req.session.isAuthenticated) {
+        return res.status(401).json({ message: 'Unauthorized. Please log in.' });
+    }
+
+    const { username } = req.session.account || {};
+    if (!username) {
+        return res.status(401).json({ message: 'Unauthorized. Username is missing.' });
+    }
+
+    try {
+        const resumes = await models.PlainResume.find({ username });
+        if (!resumes || resumes.length === 0) {
+            return res.status(404).json({ message: 'No resumes found for this user.' });
+        }
+
+        res.status(200).json(resumes); // Return full objects
+    } catch (error) {
+        console.error('Error fetching resumes:', error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+router.post('/jobReview', async (req, res) => {
+    try {
+        const { username, selectedResumeName, selectedResume, selectedJobType, selectedSkills, jobReviewOutput, jobReviewName } = req.body;
+
+        if (!username || !selectedResumeName || !selectedResume || !selectedJobType || !jobReviewName || selectedSkills.length === 0) {
+            return res.status(400).json({ message: 'All required fields must be provided.' });
+        }
+
+        const newJobReview = new models.JobReview({
+            username,
+            selectedResumeName,
+            selectedResume,
+            selectedJobType,
+            selectedSkills,
+            jobReviewOutput, 
+            jobReviewName,
+        });
+
+        const savedJobReview = await newJobReview.save();
+
+        res.status(201).json({
+            message: 'Job review saved successfully',
+            id: savedJobReview._id,
+        });
+    } catch (error) {
+        console.error('Error saving job review:', error);
         res.status(500).json({ message: 'Internal server error' });
     }
 });
