@@ -542,3 +542,11 @@ footer{
   margin-left: 15px;
 }
 
+#past-resume-div{
+  background-color: #f9f9f9;
+  color: #2C3E50;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}

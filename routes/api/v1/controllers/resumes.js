@@ -81,10 +81,8 @@ router.get('/past_resumes', async(req, res) => {
     if (req.session.isAuthenticated) {
         // Find resume by specific user
         resumes = await req.models.PlainResume.find({ username: req.session.account.username });
-        console.log("hi")
-        console.log(resumes)
     } else {
-        // say user needs to login
+        return res.status(404).json({ message: 'User not found' });
     }
 
     let resumeData = await Promise.all(
@@ -106,21 +104,112 @@ router.get('/past_resumes', async(req, res) => {
     );
     console.log(resumeData);
     res.json(resumeData);
+})
 
+router.get('/past_simple_reviews', async(req, res) => {
+    console.log("calling from past resumes")
+    let reviews;
+    if (req.session.isAuthenticated) {
+        // Find reviews by specific user
+        reviews = await req.models.simpleReview.find({ username: req.session.account.username });
+        console.log("hi")
+        console.log(reviews)
+    } else {
+        return res.status(404).json({ message: 'User not found' });
+    }
 
-    // try {
-    //     let username = req.body.username;
-    //     const user = await models.User.find({ username: username});
-    //     if (!user) {
-    //         return res.status(404).json({ message: 'User not found' });
-    //     }
-    //     const pastResume = await models.PlainResume.find({ username: username })
-    //     console.log(pastResume)
-    //     res.send(pastResume);
-    // } catch (error) {
-    //     console.log(error);
-    //     res.send({ "status": "error", "error": error });
-    // }
+    let reviewData = await Promise.all(
+        reviews.map(async review => { 
+            try {
+                return ({ 
+                    _id: review._id,
+                    username: review.username,
+                    resumeName: review.resumeName,
+                    resume: review.resume,
+                    output: review.output,
+                    favorited: review.favorited,
+                    resumeReviewName: review.resumeReviewName,
+                    createdAt: review.createdAt
+                });
+            } catch(error){
+                console.log(error)
+                res.send(500).json({"status": "error", "error": error})
+            }
+        })
+    );
+    console.log(reviewData);
+    res.json(reviewData);
+})
+
+router.get('/past_specific_reviews', async(req, res) => {
+    console.log("calling from past resumes")
+    let reviews;
+    if (req.session.isAuthenticated) {
+        // Find reviews by specific user
+        reviews = await req.models.SpecifcReview.find({ username: req.session.account.username });
+        console.log("hi")
+        console.log(reviews)
+    } else {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    let reviewData = await Promise.all(
+        reviews.map(async review => { 
+            try {
+                return ({ 
+                    _id: review._id,
+                    username: review.username,
+                    resumeName: review.resumeName,
+                    resume: review.resume,
+                    specificJobs: review.specificJobs,
+                    output: review.output,
+                    favorited: review.favorited,
+                    resumeReviewName: review.resumeReviewName,
+                    createdAt: review.createdAt
+                });
+            } catch(error){
+                console.log(error)
+                res.send(500).json({"status": "error", "error": error})
+            }
+        })
+    );
+    console.log(reviewData);
+    res.json(reviewData);
+})
+
+router.get('/past_job_reviews', async(req, res) => {
+    console.log("calling from past resumes")
+    let reviews;
+    if (req.session.isAuthenticated) {
+        // Find reviews by specific user
+        reviews = await req.models.JobReview.find({ username: req.session.account.username });
+        console.log("hi")
+        console.log(reviews)
+    } else {
+        return res.status(404).json({ message: 'User not found' });
+    }
+
+    let reviewData = await Promise.all(
+        reviews.map(async review => { 
+            try {
+                return ({ 
+                    _id: review._id,
+                    username: review.username,
+                    selectedResume: review.selectedResume,
+                    selectedJobType: review.selectedJobType,
+                    selectedSkills: review.selectedSkills,
+                    jobReviewOutput: review.jobReviewOutput,
+                    jobReviewName: review.jobReviewName,
+                    createdAt: review.createdAt
+                });
+            } catch(error){
+                console.log(error)
+                res.send(500).json({"status": "error", "error": error})
+            }
+        })
+    );
+    console.log(reviewData);
+    res.json(reviewData);
 })
 
 router.post('/simple', async (req, res) => {
@@ -193,10 +282,5 @@ router.post('/specific', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
-
-
-
-
-
 
 export default router;
