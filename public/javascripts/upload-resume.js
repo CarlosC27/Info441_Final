@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     beginButton.addEventListener('click', () => {
         const resume = resumeTextInput.value.trim();
         const skills = userData.skills;
-        const message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
+        let message = `Here is the resume content: ${resume}. And here is the skills: ${skills}`
         if (specificJobs.length > 0) {
             message += `. The jobs: ${specificJobs}`
         }
