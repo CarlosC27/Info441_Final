@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<<<<<<< HEAD
     <meta name="description" content="A basic HTML template">
     <title>RÉVISEMÉ</title>
     <link rel="stylesheet" href="style.css">
@@ -90,3 +91,75 @@
      </footer>
 </body>
 </html>
+=======
+    <meta name="description" content="Edit your profile information">
+    <title>Edit Profile - RÉVISEMÉ</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+</head>
+<body class="edit-profile-page">
+    <header class="edit-profile-page-header">
+        <h1 class="profile-page-title">Edit Profile</h1>
+    </header>
+    <main class="edit-profile-main">
+        <div class="edit-profile-container">
+            <!-- First and Last Name -->
+            <div class="field-container">
+                <h2>First Name</h2>
+                <input type="text" id="fname" name="fname" placeholder="First Name" />
+                <h2>Last Name</h2>
+                <input type="text" id="lname" name="lname" placeholder="Last Name" />
+                <h2>Email</h2>
+                <input type="text" id="userEmail" name="userEmail" placeholder="email" />
+                <button class="gold-button" id="updateInfo">Update Info</button>
+            </div>
+
+            <!-- Job Title -->
+            <div class="field-container">
+                <h2>Job Title</h2>
+                <input type="text" id="jobTitle" name="jobTitle" placeholder="Job Title" />
+                <button class="gold-button" id="updateJobTitle">Update Job Title</button>
+            </div>
+
+            <!-- Favorite Resumes -->
+            <div class="field-container">
+                <h2>Favorite Resumes</h2>
+                <button class="gold-button">Choose</button>
+            </div>
+
+            <!-- Skills -->
+            <div class="field-container">
+                <h2>Skills</h2>
+                <input type="text" id="newSkill" name="newSkill" placeholder="New Skill" />
+                <button class="gold-button" id="addSkill">Add To Skills</button>
+                <div class="hidden current-skills">
+                    <div>
+                        <a>TEMP SKILL</a>
+                        <button class="delete-button">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Job Interests -->
+            <div class="field-container">
+                <h2>Job Interest</h2>
+                <input type="text" id="jobInterest" name="jobInterest" placeholder="New Job Interest" />
+                <button class="gold-button" id="addInterest">Add To Job Interests</button>
+                <div class="hidden current-interests">
+                    <div>
+                        <a>TEMP JOB INTEREST</a>
+                        <button class="delete-button">Delete</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Save Profile -->
+            <div class="save-button-container">
+                <button class="gold-button" id="saveProfile">Save Profile</button>
+            </div>
+        </div>
+    </main>
+    <script src="./javascripts/edit-profile.js"></script>
+</body>
+</html>
+>>>>>>> 299ef953061c269e13d9f23af6f2603ee94f8f61

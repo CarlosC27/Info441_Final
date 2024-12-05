@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Users can see old resume reviews">
+    <title>RÉVISEMÉ</title>
+    <link rel="stylesheet" href="./stylesheets/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baskervville:ital@0;1&family=Erica+One&family=Kumbh+Sans:wght@100..900&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Swanky+and+Moo+Moo&display=swap" rel="stylesheet">
+</head>
+<body class="past-reviews">
+    <header class="past-reviews-header">
+        <h1 class="past-reviews-title">Past Reviews</h1>
+        <div class="profile">
+            <img src="./Assets/profile-picture-icon.png" alt="Profile Picture" id="profileDiv" class="profile-picture">
+        </div>
+    </header>
+    <main class="past-reviews-main">
+        <div class="past-reviews-container">
+            <div class="dropdown">
+                <label class="large-label" for="filter">Filter By:</label>
+                <select class="filter-drpodown" name="filter" id="filter">
+                    <option value="None">None</option>
+                    <option value="Date">Date</option>
+                    <option value="Name">Name</option>
+                    <option value="Favorites">Favorites</option>
+                </select>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- <p>&copy; 2024 RÉVISEMÉ. All rights reserved.</p> -->
+    </footer>
+    <script src="./javascripts/past-reviews.js"></script>
+</body>
+</html>

@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "undefined/subscriptions/95b598a3-a9af-4d16-a93f-03aea4cb29f3/resourceGroups/appsvc_linux_centralus3/providers/Microsoft.Web/sites/reviseme",
+    "appService.deploySubpath": "."
+}
