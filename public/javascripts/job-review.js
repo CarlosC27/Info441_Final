@@ -152,39 +152,31 @@ document.addEventListener('DOMContentLoaded', () => {
     const beginButtonJob = document.getElementById('beginButtonJob');
     let jobOutput = document.getElementById('job-review-output').querySelector('textarea');
 
-    beginButtonJob.addEventListener("click", () => {
+    beginButtonJob.addEventListener("click", async () => {
         jobOutput.placeholder = "Loading...";
         const message = `Here is my current resume: ${selectedResumeContent}. Here is the specific job I am looking into: ${selectedJobType}. Here is my skills: ${selectedSkills}`;
-        const options = {
+        const response = await fetch('/api/perplexity/analyze-job', {
             method: 'POST',
             headers: {
-              Authorization: 'Bearer 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',
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: "llama-3.1-sonar-large-128k-online",
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description, skills, and current resume. Please be sure to provide resume enchancements in bullet points that are ATS friendly as well"
-                    },
-                    {
-                        role: "user",
-                        content: message
-                    }
-                ]
+                message,
+                resume: selectedResumeContent,
+                jobType: selectedJobType,
+                skills: selectedSkills
             })
-          };
-        fetch('https://api.perplexity.ai/chat/completions', options)
-        .then(response => response.json())
-        .then(response => {console.log(response);
-            perplexityResponse = response.choices[0].message.content;
-            jobOutput.placeholder = perplexityResponse;
-            jobOutput.value = perplexityResponse; 
-            adjustTextareaHeight(jobOutput); 
+        });
 
-        })
-        .catch(err => console.error(err));
+        if (!response.ok) {
+            throw new Error('Failed to analyze job application');
+        }
+
+        const data = await response.json();
+        perplexityResponse = data.analysis;
+        jobOutput.placeholder = perplexityResponse;
+        jobOutput.value = perplexityResponse; 
+        adjustTextareaHeight(jobOutput);
     })
 
     finishReviewButton.addEventListener("click", () => {

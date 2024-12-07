@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            console.log('Resume data saved locally:', { resumeName, resume });
 
             resumePopup.classList.add('hidden');
             resumePopup.style.display = 'none';
@@ -119,7 +118,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         finishReviewPopup.style.display = 'block';
     });
 
-    beginButton.addEventListener('click', () => {
+    beginButton.addEventListener('click', async () => {
         reivewOutput.placeholder = "Loading...";
         const resume = resumeTextInput.value.trim();
         const skills = userData.skills;
@@ -127,35 +126,27 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (specificJobs.length > 0) {
             message += `. The jobs: ${specificJobs}`
         }
-        const options = {
+        const response = await fetch('/api/perplexity/analyze', {
             method: 'POST',
             headers: {
-              Authorization: 'Bearer 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',
-              'Content-Type': 'application/json'
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                model: "llama-3.1-sonar-large-128k-online",
-                messages: [
-                    {
-                        role: "system",
-                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job type and and selected skills.Please be sure to provide resume enchancements in bullet points that are ATS friendly as well"
-                    },
-                    {
-                        role: "user",
-                        content: message
-                    }
-                ]
+                message,
+                skills,
+                specificJobs
             })
-          };
-        fetch('https://api.perplexity.ai/chat/completions', options)
-        .then(response => response.json())
-        .then(response => {console.log(response);
-            perplexityResponse = response.choices[0].message.content;
-            reivewOutput.placeholder = perplexityResponse;
-            reivewOutput.value = perplexityResponse; 
-            adjustTextareaHeight(reivewOutput); 
-        })
-        .catch(err => console.error(err));
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to analyze resume');
+        }
+
+        const data = await response.json();
+        perplexityResponse = data.analysis;
+        reivewOutput.placeholder = perplexityResponse;
+        reivewOutput.value = perplexityResponse; 
+        adjustTextareaHeight(reivewOutput);
     })
 
    

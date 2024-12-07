@@ -2,8 +2,6 @@ import express from 'express';
 const router = express.Router();
 
 router.post('/register', async (req, res) => {
-  console.log("Incoming request body:", req.body);
-  console.log("Session data:", req.session);
 
   if (!req.session || !req.session.isAuthenticated) {
       console.error("Unauthorized: User not logged in.");
@@ -71,7 +69,6 @@ router.put('/update', async (req, res) => {
 
 
 router.get('/profile', async (req, res) => {
-  console.log("Session data:", req.session);
 
   if (!req.session || !req.session.isAuthenticated) {
       return res.status(401).json({ message: 'Unauthorized. Please log in.' });
@@ -95,7 +92,6 @@ router.get('/profile', async (req, res) => {
 });
 
 router.get('/jobInterests', async (req, res) => {
-  console.log("Fetching job interests. Session data:", req.session);
 
   if (!req.session || !req.session.isAuthenticated) {
       return res.status(401).json({ message: 'Unauthorized. Please log in.' });

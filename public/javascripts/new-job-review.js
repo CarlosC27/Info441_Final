@@ -43,7 +43,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 return;
             }
 
-            console.log('Resume data saved locally:', { jobName, description });
 
             jobDescriptionPopup.classList.add('hidden');
             jobDescriptionPopup.style.display = 'none';

@@ -6,7 +6,6 @@ let models = {}
 
 
 try {
-    console.log(process.env.CONNECTION_STRING);
     await mongoose.connect(process.env.CONNECTION_STRING)
     const userSchema = new mongoose.Schema({
         username: String,

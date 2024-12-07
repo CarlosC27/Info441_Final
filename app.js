@@ -110,13 +110,6 @@ app.get('/signinNewUser', (req, res, next) => {
         if (err) {
             console.error("Error during login:", err);
             return next(err);
-        }
-
-        // Simulating session population for testing
-        req.session.isAuthenticated = true; 
-        req.session.account = { 
-            username: "testUser", // Replace with actual username
-            name: "Test User" // Replace with actual name
         };
 
         console.log("Session after login:", req.session);

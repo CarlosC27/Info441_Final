@@ -5,7 +5,6 @@ async function init(){
 async function loadResumes(){
 
     try {
-        console.log("HELLO");
         const resumeJson = await fetch('api/resumes/past_resumes',  { credentials: 'include' });
         const resumeData = await resumeJson.json();
         console.log("response status is "+ resumeJson.ok);

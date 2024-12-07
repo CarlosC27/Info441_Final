@@ -5,10 +5,8 @@ var router = express.Router();
 
 router.post('/upload_resume', async function(req, res, next) {
     let session = req.session;
-    // change this to session.authenticated later
-    if (true) {
+    if (req.session.isAuthenticated) {
         try {
-            // let user = req.session.account.username;
             const { resume, job_description, username, filtered_user_skills } = req.body;
             const apiKey = process.env.PERPLEXITY_API_KEY; 
             const apiUrl = "https://api.perplexity.ai/chat/completions";
@@ -35,7 +33,6 @@ router.post('/upload_resume', async function(req, res, next) {
                     'Content-Type': 'application/json'
                 }
             });
-            console.log('Modified Resume:', response.data.choices[0].message.content);
 
             const modifiedResumeText = response.data.choices[0].message.content;
 
@@ -60,14 +57,12 @@ router.post('/upload_resume', async function(req, res, next) {
 router.get('/review_results', async function(req, res, next) {
     try {
         let username = req.body.username;
-        console.log("username is " + username);
         const user = await models.User.find({ username: username});
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
         const latestResume = await models.Resume.find({ username: username })
             .sort({ createdAt: -1 })
-        console.log("latest resume is " + latestResume);
         res.send(latestResume);
     } catch (error) {
         console.log(error);
@@ -76,7 +71,6 @@ router.get('/review_results', async function(req, res, next) {
 })
 
 router.get('/past_resumes', async(req, res) => {
-    console.log("calling from past resumes")
     let resumes;
     if (req.session.isAuthenticated) {
         // Find resume by specific user
@@ -102,18 +96,14 @@ router.get('/past_resumes', async(req, res) => {
             }
         })
     );
-    console.log(resumeData);
     res.json(resumeData);
 })
 
 router.get('/past_simple_reviews', async(req, res) => {
-    console.log("calling from past resumes")
     let reviews;
     if (req.session.isAuthenticated) {
         // Find reviews by specific user
         reviews = await req.models.simpleReview.find({ username: req.session.account.username });
-        console.log("hi")
-        console.log(reviews)
     } else {
         return res.status(404).json({ message: 'User not found' });
     }
@@ -137,12 +127,10 @@ router.get('/past_simple_reviews', async(req, res) => {
             }
         })
     );
-    console.log(reviewData);
     res.json(reviewData);
 })
 
 router.get('/past_specific_reviews', async(req, res) => {
-    console.log("calling from past resumes")
     let reviews;
     if (req.session.isAuthenticated) {
         // Find reviews by specific user
@@ -173,18 +161,14 @@ router.get('/past_specific_reviews', async(req, res) => {
             }
         })
     );
-    console.log(reviewData);
     res.json(reviewData);
 })
 
 router.get('/past_job_reviews', async(req, res) => {
-    console.log("calling from past resumes")
     let reviews;
     if (req.session.isAuthenticated) {
         // Find reviews by specific user
         reviews = await req.models.JobReview.find({ username: req.session.account.username });
-        console.log("hi")
-        console.log(reviews)
     } else {
         return res.status(404).json({ message: 'User not found' });
     }
@@ -209,7 +193,6 @@ router.get('/past_job_reviews', async(req, res) => {
             }
         })
     );
-    console.log(reviewData);
     res.json(reviewData);
 })
 
