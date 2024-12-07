@@ -27,9 +27,9 @@ app.get('/', (req, res) => {
   
   const authConfig = {
     auth: {
-        clientId: "f7ae4642-1ee4-4d86-b40a-7ea47ef3fb8c",
+        clientId: process.env.CLIENT_ID,
         authority: "https://login.microsoftonline.com/f6b6dd5b-f02f-441a-99a0-162ac5060bd2",
-        clientSecret: "LLz8Q~nx0tDkJXf1mUnhumwwmomGklWNNnvNlcVn",
+        clientSecret: process.env.CLIENT_SECRET,
         redirectUri: "http://localhost:3000/redirect",
         postLoginRedirectUri: "/temp"
 
@@ -64,7 +64,6 @@ app.use(authProvider.authenticate());
 
 app.use('/api', apiRouter);
 
-
 app.get('/temp', async (req, res) => {
     console.log("Post-login processing...");
 
@@ -88,7 +87,6 @@ app.get('/temp', async (req, res) => {
     }
 });
 
-
 app.get('/signin', (req, res, next) => {
     console.log('Sign-in initiated...');
     
@@ -96,12 +94,6 @@ app.get('/signin', (req, res, next) => {
         postLoginRedirectUri: "/temp", 
     })(req, res, next);
 });
-
-
-
-
-
-
 
 app.get('/signinNewUser', (req, res, next) => {
     return req.authContext.login({
@@ -116,10 +108,6 @@ app.get('/signinNewUser', (req, res, next) => {
         res.redirect("/register-page.html");
     });
 });
-
-
-
-
 
 app.get('/signout', (req, res, next) => {
     return req.authContext.logout({
