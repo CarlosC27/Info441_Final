@@ -28,7 +28,7 @@ app.get('/', (req, res) => {
   const authConfig = {
     auth: {
         clientId: process.env.CLIENT_ID,
-        authority: "https://login.microsoftonline.com/f6b6dd5b-f02f-441a-99a0-162ac5060bd2",
+        authority: process.env.CONFIG_AUTHORITY,
         clientSecret: process.env.CLIENT_SECRET,
         redirectUri: "http://localhost:3000/redirect",
         postLoginRedirectUri: "/temp"
