@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 messages: [
                     {
                         role: "system",
-                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description, skills, and current resume."
+                        content: "You are an AI assistant that helps to improve and tailor resumes for job applications. Please provide suggestions to enhance the resume based on the provided job description, skills, and current resume. Please be sure to provide resume enchancements in bullet points that are ATS friendly as well"
                     },
                     {
                         role: "user",

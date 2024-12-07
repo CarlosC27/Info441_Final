@@ -30,7 +30,9 @@ app.get('/', (req, res) => {
         clientId: "f7ae4642-1ee4-4d86-b40a-7ea47ef3fb8c",
         authority: "https://login.microsoftonline.com/f6b6dd5b-f02f-441a-99a0-162ac5060bd2",
         clientSecret: "LLz8Q~nx0tDkJXf1mUnhumwwmomGklWNNnvNlcVn",
-        redirectUri: "http://localhost:3000/redirect"
+        redirectUri: "http://localhost:3000/redirect",
+        postLoginRedirectUri: "/temp"
+
     },
     system: {
         loggerOptions: {
