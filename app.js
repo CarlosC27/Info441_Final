@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
         clientId: process.env.CLIENT_ID,
         authority: process.env.CONFIG_AUTHORITY,
         clientSecret: process.env.CLIENT_SECRET,
-        redirectUri: "http://localhost:3000/redirect",
+        redirectUri: "https://info441-final-ozwd.onrender.com/redirect",
         postLoginRedirectUri: "/temp"
 
     },
