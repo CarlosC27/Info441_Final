@@ -6,6 +6,9 @@
 - **Ayaan Rahim**
 - **Olivia Sapp**
 
+### Deployed render URL:
+- https://info441-final-ozwd.onrender.com
+
 ### Figma Design
 [Figma Board - Resume Builder](https://www.figma.com/board/X93Bdr4Ct5KA1xi94V2tCj/Resume-Builder?node-id=0-1&t=hn7VfT08u4kX7XnE-1)
 
