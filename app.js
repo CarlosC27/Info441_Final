@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'log-in-page.html'));
   });
   
-  const authConfig = {
+  const authConfig = { 
     auth: {
         clientId: process.env.CLIENT_ID,
         authority: process.env.CONFIG_AUTHORITY,
